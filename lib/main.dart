@@ -34,103 +34,188 @@ class _MyMainState extends State<MyMain> {
 
     return Scaffold(
       body: SafeArea(
-          child: Column(
-        children: [
-          Container(
-            width: double.infinity,
-            height: size.height * 0.6,
-            color: Colors.white,
-            child: Stack(
-              children: [
-                Container(
-                  width: double.infinity,
-                  height: size.height * 0.5,
-                  decoration: BoxDecoration(
-                      image: DecorationImage(
-                          image: AssetImage(listTravel[_index].img.toString()),
-                          fit: BoxFit.cover),
-                      borderRadius: const BorderRadius.only(
-                          bottomRight: Radius.circular(50),
-                          bottomLeft: Radius.circular(50))),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(10),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Container(
-                        width: 50,
-                        height: 50,
-                        decoration: const BoxDecoration(
-                          shape: BoxShape.circle,
-                          color: Color.fromARGB(104, 240, 240, 240),
-                        ),
-                        child: const Icon(CupertinoIcons.arrow_left),
-                      ),
-                      Container(
-                        width: 50,
-                        height: 50,
-                        decoration: const BoxDecoration(
-                          shape: BoxShape.circle,
-                          color: Color.fromARGB(104, 240, 240, 240),
-                        ),
-                        child: const Icon(CupertinoIcons.heart),
-                      )
-                    ],
+          child: SingleChildScrollView(
+        child: Column(
+          children: [
+            Container(
+              width: double.infinity,
+              height: size.height * 0.58,
+              color: Colors.white,
+              child: Stack(
+                children: [
+                  Container(
+                    width: double.infinity,
+                    height: size.height * 0.5,
+                    decoration: BoxDecoration(
+                        image: DecorationImage(
+                            image:
+                                AssetImage(listTravel[_index].img.toString()),
+                            fit: BoxFit.cover),
+                        borderRadius: const BorderRadius.only(
+                            bottomRight: Radius.circular(50),
+                            bottomLeft: Radius.circular(50))),
                   ),
-                ),
-                Positioned(
-                  top: 70,
-                  right: 7,
-                  child: SizedBox(
-                    width: 70,
-                    height: double.maxFinite,
-                    child: ListView.builder(
-                      itemCount: listTravel.length,
-                      itemBuilder: (context, index) {
-                        return itemPic(index, sizeItemPic);
-                      },
+                  Padding(
+                    padding: const EdgeInsets.all(10),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Container(
+                          width: 50,
+                          height: 50,
+                          decoration: const BoxDecoration(
+                            shape: BoxShape.circle,
+                            color: Color.fromARGB(104, 240, 240, 240),
+                          ),
+                          child: const Icon(CupertinoIcons.arrow_left),
+                        ),
+                        Container(
+                          width: 50,
+                          height: 50,
+                          decoration: const BoxDecoration(
+                            shape: BoxShape.circle,
+                            color: Color.fromARGB(104, 240, 240, 240),
+                          ),
+                          child: const Icon(CupertinoIcons.heart),
+                        )
+                      ],
                     ),
                   ),
-                ),
-                Positioned(
-                    bottom: 70,
-                    left: 30,
+                  Positioned(
+                    top: 70,
+                    right: 7,
+                    child: SizedBox(
+                      width: 70,
+                      height: double.maxFinite,
+                      child: ListView.builder(
+                        itemCount: listTravel.length,
+                        itemBuilder: (context, index) {
+                          return itemPic(index, sizeItemPic);
+                        },
+                      ),
+                    ),
+                  ),
+                  Positioned(
+                      bottom: 70,
+                      left: 30,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            listTravel[_index].name.toString(),
+                            style: const TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold),
+                          ),
+                          const SizedBox(
+                            height: 10,
+                          ),
+                          Row(
+                            children: [
+                              const Icon(
+                                CupertinoIcons.placemark_fill,
+                                color: Colors.white,
+                              ),
+                              Text(
+                                listTravel[_index].location.toString(),
+                                style: const TextStyle(color: Colors.white),
+                              )
+                            ],
+                          )
+                        ],
+                      ))
+                ],
+              ),
+            ),
+            Container(
+              width: double.infinity,
+              color: Colors.white,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      itemCard(
+                          'Distance', listTravel[_index].distance.toString()),
+                      itemCard('Temp', listTravel[_index].temp.toString()),
+                      itemCard('Rating', listTravel[_index].rating.toString()),
+                    ],
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(12.0),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(
-                          listTravel[_index].name.toString(),
-                          style: const TextStyle(
-                              color: Colors.white, fontWeight: FontWeight.bold),
-                        ),
+                        const Text('Description'),
+                        Text(listTravel[_index].description.toString()),
                         const SizedBox(
-                          height: 10,
+                          height: 5,
                         ),
                         Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            const Icon(
-                              CupertinoIcons.placemark_fill,
-                              color: Colors.white,
+                            Column(
+                              children: [
+                                const Text('Total Price'),
+                                Text(
+                                  "${listTravel[_index].price.toString()}\$",
+                                  style: const TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 20),
+                                ),
+                              ],
                             ),
-                            Text(
-                              listTravel[_index].location.toString(),
-                              style: const TextStyle(color: Colors.white),
-                            )
+                            Container(
+                              width: 100,
+                              height: 70,
+                              decoration: const BoxDecoration(
+                                shape: BoxShape.circle,
+                                color: Colors.black,
+                              ),
+                              child: const Icon(
+                                CupertinoIcons.arrow_right,
+                                color: Colors.white,
+                              ),
+                            ),
                           ],
                         )
                       ],
-                    ))
-              ],
+                    ),
+                  )
+                ],
+              ),
             ),
-          ),
-          Expanded(
-              child: Container(
-            width: double.infinity,
-            color: Colors.blue,
-          ))
-        ],
+          ],
+        ),
       )),
+    );
+  }
+
+  Widget itemCard(String nameCard, String valueCard) {
+    return SizedBox(
+      width: 90,
+      height: 90,
+      child: Card(
+        elevation: 5,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(20),
+          side: const BorderSide(color: Colors.black26, width: 1),
+        ),
+        child: Container(
+          padding: const EdgeInsets.all(12),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(nameCard),
+              const SizedBox(
+                height: 20,
+              ),
+              Text(valueCard),
+            ],
+          ),
+        ),
+      ),
     );
   }
 
